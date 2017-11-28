@@ -4,7 +4,7 @@ function version {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local ver_tugboat="0.0.1"
+  local ver_tugboat="$(cd "$shome/vendor/tugboat" && git show-ref --tags | grep "^$(git rev-parse HEAD)" | cut -d/ -f3-)"
   jq -n --arg tugboat "$ver_tugboat" '{tugboat: $tugboat}'
 }
 

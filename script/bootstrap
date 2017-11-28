@@ -4,7 +4,12 @@ function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  uname -a
+  cd "$shome"
+  mkdir "$shome/vendor"
+  git clone git@github.com:articulate/tugboat "$shome/vendor/tugboat" || true
+  cd "$shome/vendor/tugboat"
+  git fetch
+  git reset --hard "$TUGBOAT_VERSION"
 }
 
 main "$@"
